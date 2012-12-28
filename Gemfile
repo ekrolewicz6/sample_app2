@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.9'
+gem 'pg', '0.12.2'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -22,10 +23,6 @@ group :test do
   gem 'capybara', '1.1.2'
   gem 'rb-fsevent', '0.9.1', :require => false
   gem 'growl', '1.0.3'
-end
-
-group :production do
-  gem 'pg', '0.12.2'
 end
 
 # To use ActiveModel has_secure_password
