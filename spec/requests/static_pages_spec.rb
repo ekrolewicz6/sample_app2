@@ -1,81 +1,34 @@
 require 'spec_helper'
 
 describe "Static pages" do
-	let(:base_title) {"Ruby on Rails Tutorial Sample App"}
+
+  subject {page} # defines the page as the subject, 
+                  # "should" calls this subject by Capybara
   describe "Home page" do
-  	
-    it "should have the h1 'Sample App'" do
-      visit root_path
-      page.should have_selector('h1', :text => 'Sample App')
-		end 
+    #First visit the root path before checking tests.
+    before { visit root_path } # Same as before(:each)
 
-		it "should have this base title 'Home'" do
-  		visit root_path
-  		page.should have_selector('title', 
-  			:text => "Ruby on Rails Tutorial Sample App")
+    it {should have_selector('h1', text: 'Sample App')}
+		it {should have_selector('title', text: full_title('')) }
+    it {should_not have_selector 'title', :text => ' | Home' }
 		end
-
-		it "should not have a custom page title" do
-  		visit root_path
-  		page.should_not have_selector('title', 
-  			:text => ' | Home')
-		end			
-  end
 
   describe "Help page" do
-    it "should have the h1 'Help'" do
-      visit help_path
-      page.should have_selector('h1', :text => 'Help')
-		end 
-
-		it "should have base title 'Help'" do
-      visit help_path
-      page.should have_selector('title', 
-      	:text => "Ruby on Rails Tutorial Sample App")
-		end
-
-		it "should not have a custom page title" do
-  		visit help_path
-  		page.should_not have_selector('title', 
-  			:text => ' | Help')
-		end	
+    before { visit help_path } # Same as before(:each)
+    
+    it {should have_selector('h1', text: 'Help')}
+		it {should have_selector('title', text: full_title('Help'))}
   end
 
   describe "About page" do
-    it "should have the content 'About Us'" do
-      visit about_path
-      page.should have_selector('h1', :text => 'About Us')
-		end 
-
-		it "should have right title 'About'" do
-      visit about_path
-      page.should have_selector('title', 
-      	:text => "Ruby on Rails Tutorial Sample App")
+    before { visit about_path } # Same as before(:each)
+    it {should have_selector('h1', text: 'About Us')}
+    it {should have_selector('title', text: full_title('About Us'))}
 		end
-
-		it "should not have a custom page title" do
-  		visit about_path
-  		page.should_not have_selector('title', 
-  			:text => ' | About')
-		end	
-	end
 
 	describe "Contact page" do
-    it "should have the h1 'Contact Us'" do
-      visit contact_path
-      page.should have_selector('h1', :text => 'Contact Us')
-		end 
-
-		it "should have right title 'Contact'" do
-      visit contact_path
-      page.should have_selector('title', 
-      	:text => "Ruby on Rails Tutorial Sample App")
-		end
-
-		it "should not have a custom page title" do
-  		visit contact_path
-  		page.should_not have_selector('title', 
-  			:text => ' | Contact Us')
-		end	
+    before { visit contact_path } # Same as before(:each)
+    it {should have_selector('h1', text: 'Contact Us')}
+		it {should have_selector('title', text: full_title('Contact Us'))}
 	end
 end
